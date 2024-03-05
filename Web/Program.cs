@@ -3,9 +3,8 @@ using Core.Interfaces;
 using Core.Service;
 using Infra;
 using Infra.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 
@@ -24,10 +23,9 @@ namespace Web
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+     
+            builder.Services.AddMediatR(typeof(Program).Assembly, typeof(User).Assembly);
 
-            var assembly = Assembly.GetExecutingAssembly();
-
-            builder.Services.AddMediatR(assembly);
             builder.Services.AddAutoMapper(typeof(Program));
 
 
