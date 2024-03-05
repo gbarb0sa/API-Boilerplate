@@ -1,4 +1,5 @@
 ﻿using Core.Interfaces;
+using Core.Models.Filters;
 using Infra.Helpers;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,16 +19,16 @@ namespace Infra.Repositories
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
-        public virtual async Task<IEnumerable<TEntity>> GetAll(int? take, int? offSet, string sortingProp, bool? asc)
+        public virtual async Task<IEnumerable<TEntity>> GetAll(BaseRequestFilter filter)
         {
             var query = _dbContext.Set<TEntity>().AsQueryable();
 
-            if (!string.IsNullOrEmpty(sortingProp) && asc != null)
-                if (DataHelpers.CheckExistingProperty<TEntity>(sortingProp))
-                    query = query.OrderByDynamic(sortingProp, (bool)asc);
+            if (!string.IsNullOrEmpty(filter.SortingProp))
+                if (DataHelpers.CheckExistingProperty<TEntity>(filter.SortingProp))
+                    query = query.OrderByDynamic(filter.SortingProp, filter.Ascending);
 
-            if (take != null && offSet != null)
-                return await query.Skip((int)offSet).Take((int)take).ToListAsync();
+            if (filter.Offset != null)
+                return await query.Skip((int)filter.Offset).Take(filter.Take).ToListAsync();
 
             return await query.ToListAsync();
         }

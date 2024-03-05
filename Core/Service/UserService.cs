@@ -25,8 +25,7 @@ namespace Core.Service
 
         public async Task<IEnumerable<User>> GetAll(GetUserRequestFilter filter)
         {
-            throw new NotImplementedException();
-            //return await _repository.GetAll();
+            return await _repository.GetAll(filter);
         }
 
         public async Task<User> GetById(int id)

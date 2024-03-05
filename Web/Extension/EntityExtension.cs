@@ -1,6 +1,5 @@
 using Infra;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Web.Extension
 {

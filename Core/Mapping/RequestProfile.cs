@@ -9,7 +9,8 @@ namespace Core.Mapping
         public RequestProfile()
         {
             CreateMap<CreateUserRequest, User>();
-            CreateMap<UpdateUserRequest, User>();
+            CreateMap<UpdateUserRequest, User>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
         }
     }
 }

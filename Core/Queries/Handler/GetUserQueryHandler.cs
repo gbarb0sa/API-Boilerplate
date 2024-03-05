@@ -20,9 +20,22 @@ namespace Core.Queries.Handler
         public async Task<Result<IEnumerable<UserResponse>>> Handle(GetUserQuery query, CancellationToken cancellationToken)
         {
             var result = new Result<IEnumerable<UserResponse>>();
-            var users = await _service.GetAll(query.Filter);
 
-            //continuar a implementacao
+            try
+            {
+                var users = await _service.GetAll(query.Filter);
+
+                var enumerable = users.ToList();
+                result.Value = enumerable.Select(u => _mapper.Map<UserResponse>(u));
+                result.Count = enumerable.Count;
+
+                return result;
+            }
+            catch
+            {
+                result.WithException("Erro no sistema.");
+            }
+
             return result;
         }
     }

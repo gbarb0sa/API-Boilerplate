@@ -1,6 +1,5 @@
 using AutoMapper;
 using Core.Mapping;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Web.Extension
 {

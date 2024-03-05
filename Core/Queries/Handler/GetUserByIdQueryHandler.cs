@@ -1,33 +1,33 @@
 ﻿using AutoMapper;
-using Core.Entities;
 using Core.Helpers;
 using Core.Interfaces;
 using Core.Models.Responses;
 using MediatR;
 
-namespace Core.Commands.Handler
+namespace Core.Queries.Handler
 {
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Result<UserResponse>>
+    public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, Result<UserResponse>>
     {
         private readonly IUserService _service;
         private readonly IMapper _mapper;
 
-        public CreateUserCommandHandler(IUserService service, IMapper mapper)
+        public GetUserByIdQueryHandler(IUserService service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
         }
 
-        public async Task<Result<UserResponse>> Handle(CreateUserCommand command, CancellationToken cancellationToken)
+        public async Task<Result<UserResponse>> Handle(GetUserByIdQuery query, CancellationToken cancellationToken)
         {
             var result = new Result<UserResponse>();
 
             try
             {
-                var user = _mapper.Map<User>(command.Request);
+                var user = await _service.GetById(query.Id);
 
-                var newUser = await _service.AddAsync(user);
-                result.Value = _mapper.Map<UserResponse>(newUser);
+                if (user == null) { result.WithNotFound("Usuário não encontrado"); }
+
+                result.Value = _mapper.Map<UserResponse>(user);
             }
             catch
             {

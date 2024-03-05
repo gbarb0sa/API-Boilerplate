@@ -1,10 +1,9 @@
 ﻿using Core.Helpers;
-using Core.Models.Responses;
 using MediatR;
 
 namespace Core.Commands
 {
-    public class DeleteUserCommand : IRequest<Result<UserResponse>>
+    public class DeleteUserCommand : IRequest<Result<DeleteMessage>>
     {
         public int Id { get; set; }
 

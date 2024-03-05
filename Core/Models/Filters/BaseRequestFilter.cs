@@ -5,7 +5,7 @@
         public int Take { get; set; } = 100;
         public int? Page { get; set; }
         public int? Offset { get; set; }
-        public string SortingProp { get; set; }
+        public string? SortingProp { get; set; }
         public bool Ascending { get; set; } = true;
 
         internal int Skip

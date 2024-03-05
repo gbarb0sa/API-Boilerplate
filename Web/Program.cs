@@ -6,6 +6,7 @@ using Infra.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Web.Extension;
 
 
 namespace Web
@@ -27,8 +28,7 @@ namespace Web
             builder.Services.AddMediatR(typeof(Program).Assembly, typeof(User).Assembly);
 
             builder.Services.AddAutoMapper(typeof(Program));
-
-
+            builder.Services.AddMapping();
 
             builder.Services.AddAntiforgery(options =>
             {
