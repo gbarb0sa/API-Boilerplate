@@ -1,3 +1,3 @@
 TO_DO: Corrigir mediatr : feito.
-TO_DO: Corrigir retorno do Enum, fazer retornar como string (pegar enum description);
-TO_DO: Corrigir o save no banco do enum, enviar como string.
+TO_DO: Corrigir retorno do Enum, fazer retornar como string (pegar enum description): feito.
+TO_DO: Corrigir o save no banco do enum, enviar como string: feito.
