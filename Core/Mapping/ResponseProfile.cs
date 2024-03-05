@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Entities;
+using Core.Helpers;
 using Core.Models.Responses;
 
 namespace Core.Mapping
@@ -8,7 +9,9 @@ namespace Core.Mapping
     {
         public ResponseProfile()
         {
-            CreateMap<User, UserResponse>();
+            CreateMap<User, UserResponse>()
+                .ForMember(dest => dest.Gender,
+                    opt => opt.MapFrom(src => src.Gender.GetEnumDescription()));
         }
     }
 }
