@@ -18,6 +18,13 @@ namespace Infra.ModelConfiguration
             builder.Property(x => x.Email).HasMaxLength(64).HasColumnName("email");
             builder.Property(x => x.Gender).IsRequired().HasColumnName("gender")
                 .HasConversion(v => v.ToString(), v => (Gender)Enum.Parse(typeof(Gender), v));
+
+            //Relationship
+            builder.HasOne(u => u.Information)
+                .WithOne(p => p.User)
+                .HasForeignKey<Information>(p => p.UserId);
+
+
         }
     }
 }
